@@ -1,0 +1,23 @@
+# Python / Backend
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+
+# React / Frontend
+frontend/node_modules/
+frontend/build/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# Large Datasets (Crucial for GitHub)
+datasets/
+ml-notebooks/.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
