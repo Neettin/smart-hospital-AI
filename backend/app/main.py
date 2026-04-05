@@ -29,7 +29,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
-        "https://your-app.vercel.app",   
+        "https://smart-hospital-ai.vercel.app/",   
         "*"                              
     ],
     allow_credentials=True,
