@@ -10,39 +10,39 @@ from sumy.summarizers.lsa import LsaSummarizer
 
 import nltk
 
-# Ensure required NLTK resources (safe for Render)
-try:
-    nltk.data.find("tokenizers/punkt")
-except LookupError:
-    nltk.download("punkt")
+def setup_nltk():
+    try:
+        nltk.data.find("tokenizers/punkt")
+    except LookupError:
+        nltk.download("punkt")
+
+    try:
+        nltk.data.find("tokenizers/punkt_tab")
+    except LookupError:
+        nltk.download("punkt_tab")
+
+setup_nltk()
 
 
 BACKEND = "sumy-lsa"
 
 
 def _summarize(text: str) -> str:
-    """
-    LSA-based summarization (lightweight NLP, no transformers)
-    """
-
     if not text or not text.strip():
         return "No notes provided."
 
-    # Parse text
-    parser = PlaintextParser.from_string(text, Tokenizer("english"))
+    try:
+        parser = PlaintextParser.from_string(text, Tokenizer("english"))
+        summarizer = LsaSummarizer()
 
-    # Initialize summarizer
-    summarizer = LsaSummarizer()
+        summary_sentences = summarizer(parser.document, 2)
 
-    # Number of sentences in summary (adjust if needed)
-    summary_sentences = 4
+        result = " ".join(str(sentence) for sentence in summary_sentences)
 
-    summary = summarizer(parser.document, summary_sentences)
+        return result if result else text[:300]
 
-    # Convert to string
-    result = " ".join(str(sentence) for sentence in summary)
-
-    return result if result else text[:300]
+    except Exception as e:
+        return f"Summary error: {str(e)}"
 
 
 def generate_summary(notes: str) -> dict:

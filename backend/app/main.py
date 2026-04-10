@@ -21,11 +21,6 @@ app = FastAPI(
     lifespan=None,
 )
 
-#  THEN startup event
-@app.on_event("startup")
-def startup_event():
-    nltk.download("punkt")
-
 
 # lifespan (optional but fine)
 @asynccontextmanager
