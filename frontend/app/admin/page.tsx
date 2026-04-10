@@ -18,7 +18,7 @@ interface Appointment {
 }
 type ModalMode = 'view' | 'edit' | 'delete' | 'add'
 
-const API            = 'http://127.0.0.1:8000'
+const API = 'https://smart-hospital-backend-lhdt.onrender.comm'
 const ADMIN_PASSWORD = 'admin@123'
 const STATUSES       = ['scheduled','ongoing','completed','cancelled']
 
